@@ -1,0 +1,44 @@
+---
+server:
+  port: 8080
+  contextPath: /MybootprojectApplication
+---
+spring:
+  profiles: local, default
+datasource:
+  sampleapp:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: soft123
+    driverClassName: org.postgresql.Driver
+    defaultSchema:
+    maxPoolSize: 10
+    hibernate:
+      hbm2ddl.method: update
+      show_sql: true
+      format_sql: true
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+#      temp.use_jdbc_metadata_defaults: false
+      jdbc.lob.non_contextual_creation: true
+---
+spring:
+  profiles: prod
+datasource:
+  sampleapp:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: myuser
+    password: mypassword
+    driverClassName: com.mysql.jdbc.Driver
+    defaultSchema:
+    maxPoolSize: 20
+    hibernate:
+      hbm2ddl.method: create-drop
+      show_sql: true
+      format_sql: true
+      dialect: org.hibernate.dialect.MySQLDialect
+---
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
